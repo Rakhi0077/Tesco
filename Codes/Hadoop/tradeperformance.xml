@@ -1,0 +1,145 @@
+<workflow-app xmlns="uri:oozie:workflow:0.4" name="tradeperformance">
+    <credentials>
+        <credential name="hive_auth" type="hcat">
+            <property>
+                <name>hcat.metastore.uri</name>
+                <value>thrift://pphdpmanag002xx.global.tesco.org:9083</value>
+            </property>
+            <property>
+                <name>hcat.metastore.principal</name>
+                <value>hive/_HOST@GLOBAL.TESCO.ORG</value>
+            </property>
+        </credential>
+    </credentials>
+
+    <start to="tradeperformance_category"/>
+      <action name="tradeperformance_category" cred="hive_auth">
+        <shell xmlns="uri:oozie:shell-action:0.2">
+            <job-tracker>yarnrm</job-tracker>
+            <name-node>hdfs://pphdp</name-node>
+            <configuration>
+                <property>
+                    <name>oozie.launcher.mapreduce.map.memory.mb</name>
+                    <value>3172</value>
+                </property>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>gg-uk-tescoglobal-hadoop-lab-rcoe</value>
+                </property>
+            </configuration>
+            <exec>tradeperformance_category.sh</exec>
+            <file>/insight_labs/lab_rcoe/code/oozie/shell/tradeperformance_category.sh#tradeperformance_category.sh</file>
+            <file>/user/svc-mstrcprcoe/svc-mstrcprcoe.keytab#svc-mstrcprcoe.keytab</file>
+            <file>/insight_labs/lab_rcoe/code/oozie/python/tradeperformance_category.py#tradeperformance_category.py</file>
+        </shell>
+        <ok to="tradeperformance_commercial"/>
+        <error to="kill-email"/>
+       </action>
+
+      <action name="tradeperformance_commercial" cred="hive_auth">
+        <shell xmlns="uri:oozie:shell-action:0.2">
+            <job-tracker>yarnrm</job-tracker>
+            <name-node>hdfs://pphdp</name-node>
+            <configuration>
+                <property>
+                    <name>oozie.launcher.mapreduce.map.memory.mb</name>
+                    <value>3172</value>
+                </property>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>gg-uk-tescoglobal-hadoop-lab-rcoe</value>
+                </property>
+            </configuration>
+            <exec>tradeperformance_commercial.sh</exec>
+            <file>/insight_labs/lab_rcoe/code/oozie/shell/tradeperformance_commercial.sh#tradeperformance_commercial.sh</file>
+            <file>/user/svc-mstrcprcoe/svc-mstrcprcoe.keytab#svc-mstrcprcoe.keytab</file>
+            <file>/insight_labs/lab_rcoe/code/oozie/python/tradeperformance_commercial.py#tradeperformance_commercial.py</file>
+        </shell>
+        <ok to="tradeperformance_business"/>
+        <error to="kill-email"/>
+       </action>
+
+      <action name="tradeperformance_business" cred="hive_auth">
+        <shell xmlns="uri:oozie:shell-action:0.2">
+            <job-tracker>yarnrm</job-tracker>
+            <name-node>hdfs://pphdp</name-node>
+            <configuration>
+                <property>
+                    <name>oozie.launcher.mapreduce.map.memory.mb</name>
+                    <value>3172</value>
+                </property>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>gg-uk-tescoglobal-hadoop-lab-rcoe</value>
+                </property>
+            </configuration>
+            <exec>tradeperformance_business.sh</exec>
+            <file>/insight_labs/lab_rcoe/code/oozie/shell/tradeperformance_business.sh#tradeperformance_business.sh</file>
+            <file>/user/svc-mstrcprcoe/svc-mstrcprcoe.keytab#svc-mstrcprcoe.keytab</file>
+            <file>/insight_labs/lab_rcoe/code/oozie/python/tradeperformance_business.py#tradeperformance_business.py</file>
+        </shell>
+        <ok to="tradeperformance_missionsplit_code_1"/>
+        <error to="kill-email"/>
+       </action>
+
+       <action name="tradeperformance_missionsplit_code_1" cred="hive_auth">
+        <shell xmlns="uri:oozie:shell-action:0.2">
+            <job-tracker>yarnrm</job-tracker>
+            <name-node>hdfs://pphdp</name-node>
+            <configuration>
+                <property>
+                    <name>oozie.launcher.mapreduce.map.memory.mb</name>
+                    <value>3172</value>
+                </property>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>gg-uk-tescoglobal-hadoop-lab-rcoe</value>
+                </property>
+            </configuration>
+            <exec>tradeperformance_missionsplit_code_1.sh</exec>
+            <file>/insight_labs/lab_rcoe/code/oozie/shell/tradeperformance_missionsplit_code_1.sh#tradeperformance_missionsplit_code_1.sh</file>
+            <file>/user/svc-mstrcprcoe/svc-mstrcprcoe.keytab#svc-mstrcprcoe.keytab</file>
+            <file>/insight_labs/lab_rcoe/code/oozie/python/tradeperformance_missionsplit_code_1.py#tradeperformance_missionsplit_code_1.py</file>
+        </shell>
+        <ok to="tradeperformance_missionsplit_code_2"/>
+        <error to="kill-email"/>
+       </action>
+
+       <action name="tradeperformance_missionsplit_code_2" cred="hive_auth">
+        <shell xmlns="uri:oozie:shell-action:0.2">
+            <job-tracker>yarnrm</job-tracker>
+            <name-node>hdfs://pphdp</name-node>
+            <configuration>
+                <property>
+                    <name>oozie.launcher.mapreduce.map.memory.mb</name>
+                    <value>3172</value>
+                </property>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>gg-uk-tescoglobal-hadoop-lab-rcoe</value>
+                </property>
+            </configuration>
+            <exec>tradeperformance_missionsplit_code_2.sh</exec>
+            <file>/insight_labs/lab_rcoe/code/oozie/shell/tradeperformance_missionsplit_code_2.sh#tradeperformance_missionsplit_code_2.sh</file>
+            <file>/user/svc-mstrcprcoe/svc-mstrcprcoe.keytab#svc-mstrcprcoe.keytab</file>
+            <file>/insight_labs/lab_rcoe/code/oozie/python/tradeperformance_missionsplit_code_2.py#tradeperformance_missionsplit_code_2.py</file>
+        </shell>
+        <ok to="end"/>
+        <error to="kill-email"/>
+       </action>
+
+
+      <action name="kill-email">
+        <email xmlns="uri:oozie:email-action:0.1">
+            <to>rakesh.K@tesco.com, Govindanarayan.Nagarajan@Tesco.com, rakesh.K@tesco.com</to>
+            <subject>Trade Performance Failure</subject>
+            <body>Trade Performance Spark code has failed. Kindly look into it</body>
+        </email>
+        <ok to="kill"/>
+        <error to="kill"/>
+      </action>
+      <kill name="kill">
+        <message>Action failed, error message #[[[${wf:errorMessage(wf:lastErrorNode())}]]]#</message>
+      </kill>
+    <end name="end"/>
+</workflow-app>

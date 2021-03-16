@@ -1,0 +1,26 @@
+<coordinator-app name="tradeperformance"
+                 frequency="30 7 * * 2"
+                 start="2019-07-09T00:00Z" end="2020-12-31T00:00Z" timezone="UTC"
+                 xmlns="uri:oozie:coordinator:0.2">
+    <controls>
+      <concurrency>1</concurrency>
+      <execution>FIFO</execution>
+      <throttle>1</throttle>
+    </controls>
+
+    <action>
+        <workflow>
+            <app-path>/insight_labs/lab_rcoe/code/oozie/workflow/tradeperformance.xml</app-path>
+                <configuration>
+                    <property>
+                        <name>oozie.use.system.libpath</name>
+                        <value>true</value>
+                    </property>
+                    <property>
+                        <name>date</name>
+                        <value>${coord:formatTime(coord:nominalTime(), "yyyy-MM-dd")}</value>
+                    </property>
+                </configuration>
+        </workflow>
+    </action>
+</coordinator-app>

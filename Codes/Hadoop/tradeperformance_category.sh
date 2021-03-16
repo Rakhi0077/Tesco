@@ -1,0 +1,2 @@
+kinit svc-mstrcprcoe@GLOBAL.TESCO.ORG -k -t svc-mstrcprcoe.keytab
+spark-submit --conf spark.yarn.queue=gg-uk-tescoglobal-hadoop-lab-rcoe --master yarn-client --driver-memory 3G --conf spark.yarn.executor.memoryOverhead=8000 --executor-cores 2 --executor-memory 10G --num-executors 300 tradeperformance_category.py
